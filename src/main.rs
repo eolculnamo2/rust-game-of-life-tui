@@ -16,6 +16,7 @@ use tui::Terminal;
 
 mod cells;
 
+const GEN_TIME: u64 = 5;
 fn tear_down(terminal: &mut Terminal<CrosstermBackend<Stdout>>) -> Result<(), io::Error> {
     disable_raw_mode()?;
     execute!(
@@ -55,9 +56,9 @@ fn main() -> Result<(), io::Error> {
 
     let mut cell_list = cells::init_vec();
 
-    let max_iter = 200;
+    let max_iter = 500;
     let mut cur_iter = 0;
-    let widths = array![Constraint::Length(5); cells::BOARD_WIDTH as usize];
+    let widths = array![Constraint::Length(1); cells::BOARD_WIDTH as usize];
 
     while cur_iter < max_iter {
         cell_list = cells::handle_generation_change(cell_list);
@@ -68,7 +69,7 @@ fn main() -> Result<(), io::Error> {
                 .widths(&widths);
             f.render_widget(table_block, f.size());
         })?;
-        thread::sleep(Duration::from_millis(50));
+        thread::sleep(Duration::from_millis(GEN_TIME));
         cur_iter += 1;
     }
     tear_down(&mut terminal)?;

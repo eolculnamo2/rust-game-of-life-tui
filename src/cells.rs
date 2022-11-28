@@ -1,7 +1,7 @@
 use rand::Rng;
 
-pub const BOARD_WIDTH: i16 = 50;
-pub const BOARD_HEIGHT: i16 = 50;
+pub const BOARD_WIDTH: i16 = 100;
+pub const BOARD_HEIGHT: i16 = 70;
 pub const BOARD_AREA: i16 = BOARD_WIDTH * BOARD_HEIGHT;
 
 
